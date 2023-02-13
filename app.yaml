@@ -1,0 +1,6 @@
+entrypoint: bundle exec rackup --port $PORT
+env: flex
+runtime: ruby
+
+env_variables:
+  SECRET_KEY_BASE: c71df86aa4ebbe8f054ee9b1f6428bb7c2aa59da87cf257b7046cebad0b48c7d9e82cbbef8793534c86beef2a8380414b29e7ccc11075b0dc146046b98e56470
