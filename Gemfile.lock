@@ -215,7 +215,9 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   puma (~> 5.0)
+  rack
   rails (~> 7.0.4, >= 7.0.4.2)
+  railties
   selenium-webdriver
   sprockets-rails
   sqlite3 (~> 1.4)
