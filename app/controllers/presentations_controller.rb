@@ -5,6 +5,14 @@ class PresentationsController < ApplicationController
   def index
     @presentations = Presentation.all
   end
+  
+  def example
+    @presentations = Presentation.all
+
+    respond_to do |format|
+      format.html {render :example, status: :ok}
+    end
+  end
 
   # GET /presentations/1 or /presentations/1.json
   def show

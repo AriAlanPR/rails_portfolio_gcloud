@@ -1,0 +1,73 @@
+<div class="container container-fluid">
+  <div class="row">
+    <div class="col">
+      <h1 class="rounded">
+        Example API call
+      </h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      Calling data from API https://pokeapi.co/api/v2/pokemon/{pokemon_number}
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="pkmnnumspan">Pokemon number</span>
+      </div>
+      <input type="text" id="pkmnnum" class="form-control" placeholder="Type a Number from 1 to 1000 and click Search" aria-label="pokemonnumber" aria-describedby="pkmnnumspan">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" onclick="searchPokemon()">Search</button>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <div class="row">
+    <div class="col">
+      <table class="table" hidden="true">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  async function searchPokemon() {
+    let pokemonnumber = document.getElementById("pkmnnum").value;
+    let baseurl = "https://pokeapi.co/api/v2/pokemon";
+    let result = await fetch(`${baseurl}/${pokemonnumber}`);
+    let status = result.status;
+    result = await result.json();
+    console.log("result json", result);
+  }
+</script>
