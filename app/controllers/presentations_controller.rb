@@ -1,5 +1,6 @@
 class PresentationsController < ApplicationController
   before_action :set_presentation, only: %i[ show edit update destroy ]
+  include OauthHelper
 
   # GET /presentations or /presentations.json
   def index
@@ -7,10 +8,23 @@ class PresentationsController < ApplicationController
   end
   
   def example
-    @presentations = Presentation.all
 
     respond_to do |format|
       format.html {render :example, status: :ok}
+    end
+  end
+  
+  def oauth
+    state = "ketWuF5wJPh6u1tl"
+    redirecturi = "https://www.oauth.com/playground/authorization-code.html&scope=photo+offline_access"
+    # redirecturi = "https://313b-45-65-152-57.ngrok.io/oauthexample"
+    @targeturl1 = build_step1_url(redirecturi, state)
+    
+    p "target url 1"
+    p @targeturl1
+
+    respond_to do |format|
+      format.html {render :oauthexample, status: :ok}
     end
   end
 
@@ -74,5 +88,9 @@ class PresentationsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def presentation_params
     params.require(:presentation).permit(:title, :subtitle, :content, :image)
+  end
+
+  def oauth_params
+    params.permit(:state, :code)
   end
 end

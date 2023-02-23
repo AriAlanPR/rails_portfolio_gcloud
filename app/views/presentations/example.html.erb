@@ -18,7 +18,7 @@
       <div class="input-group-prepend">
         <span class="input-group-text" id="pkmnnumspan">Pokemon number</span>
       </div>
-      <input type="text" id="pkmnnum" class="form-control" placeholder="Type a Number from 1 to 1000 and click Search" aria-label="pokemonnumber" aria-describedby="pkmnnumspan">
+      <input type="text" id="pkmnnum" class="form-control" placeholder="Type a non-decimal Number from 1 to 1008 and click Search" aria-label="pokemonnumber" aria-describedby="pkmnnumspan">
       <div class="input-group-append">
         <button class="btn btn-outline-secondary" type="button" onclick="searchPokemon()">Search</button>
       </div>
@@ -28,34 +28,18 @@
   <br>
   <div class="row">
     <div class="col">
-      <table class="table" hidden="true">
+      <table id="poketable" class="table" hidden="true">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Order</th>
+            <th scope="col">Name</th>
+            <th scope="col">Height</th>
+            <th scope="col">Weight</th>
+            <th scope="col">Sprite</th>
+            <th scope="col">Ability</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
+        <tbody id="poketbody">
         </tbody>
       </table>
     </div>
@@ -63,11 +47,78 @@
 </div>
 <script type="text/javascript">
   async function searchPokemon() {
+    //get url parameters
     let pokemonnumber = document.getElementById("pkmnnum").value;
+    if(!pokemonnumber) {
+      alert("Number field is empty");
+      return;
+    }
+
+    pokemonnumber = parseInt(pokemonnumber);
+    if(isNaN(pokemonnumber)) {
+      alert("Invalid value for number");
+      return;
+    }
+
+    if(pokemonnumber < 1 || pokemonnumber > 1008) {
+      alert("Number not in range of valid numbers");
+      return;
+    }
+
+    //define base url
     let baseurl = "https://pokeapi.co/api/v2/pokemon";
+    //make request
     let result = await fetch(`${baseurl}/${pokemonnumber}`);
+    //obtain result status
     let status = result.status;
+    //convert result to json
     result = await result.json();
     console.log("result json", result);
+
+    //get element to handle rows data to append
+    let poketbody = document.getElementById("poketbody");
+    //obtain data to use
+    let abilities = result.abilities;
+    for(ability of abilities) {
+      //define new table row
+      let tr = document.createElement("tr");
+      //define data to use in table
+      let pkmnorder = result.order;
+      let pkmnname = result.name;
+      let pkmnheight = `${result.height}''`;
+      let pkmnweight = `${result.weight/10} kg`;
+      let pkmnsprite = result.sprites.front_default;
+      let abilityname = ability.ability.name;
+      //define new table columns
+      let tdorder = document.createElement("td");
+      let tdname = document.createElement("td");
+      let tdheight = document.createElement("td");
+      let tdweight = document.createElement("td");
+      let tdsprite = document.createElement("td");
+      let tdability = document.createElement("td");
+      //define table columns contents
+      tdorder.innerText = pkmnorder;
+      tdname.innerText = pkmnname;
+      tdheight.innerText = pkmnheight;
+      tdweight.innerText = pkmnweight;
+      tdability.innerText = abilityname;
+      //define image element for sprite
+      let imgsprite = document.createElement("img");
+      imgsprite.setAttribute("src", pkmnsprite);
+      imgsprite.setAttribute("alt", "...");
+      //append image element to image column
+      tdsprite.appendChild(imgsprite);
+      //append table columns to table row
+      tr.appendChild(tdorder);
+      tr.appendChild(tdname);
+      tr.appendChild(tdheight);
+      tr.appendChild(tdweight);
+      tr.appendChild(tdsprite);
+      tr.appendChild(tdability);
+      //add row to table
+      poketbody.appendChild(tr);
+    }
+
+    document.getElementById("poketable").hidden = false;
   }
 </script>

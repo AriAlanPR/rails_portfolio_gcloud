@@ -46,7 +46,7 @@
     <div class="col">
       <div class="card">
         <div class="card-header">
-          <h3 class="mycenter">API Integration Worked</h3>
+          <h3 class="mycenter">API Integration Worked Using</h3>
         </div>
         <ul class="list-group list-group-flush">
           <li class="list-group-item">Freshdesk</li>
@@ -58,8 +58,10 @@
           <li class="list-group-item">DocuSign</li>
           <li class="list-group-item">Webex</li>
           <li class="list-group-item">Microsoft Calendar Events</li>
+          <li class="list-group-item">Jira API</li>
           <li class="list-group-item">Authentication Using OAuth 1.0</li>
           <li class="list-group-item">Authentication Using OAuth 2.0</li>
+          <li class="list-group-item">API Webhooks</li>
         </ul>
       </div>
     </div>
@@ -100,6 +102,9 @@
               <div class="btn-group">
                 <%= link_to 'Details', presentation, :class => "btn btn-outline-dark btn-text-black", :onmouseout => "this.style.color='black';", :onmouseover => "this.style.color='white';" %>
                 <%= link_to 'Edit', edit_presentation_path(presentation), :class => "btn btn-outline-dark btn-text-black", :onmouseout => "this.style.color='black';", :onmouseover => "this.style.color='white';" %>
+                <% if params['trickdev'] %>
+                  <%= link_to 'Delete', presentation, method: :delete, data: { confirm: 'Are you sure to Delete card?' }, :class => "btn btn-outline-dark btn-text-black", :onmouseout => "this.style.color='black';", :onmouseover => "this.style.color='white';" %>
+                <% end %>
               </div>
             </div>
           </div>
