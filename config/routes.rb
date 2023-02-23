@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :weathers
   resources :presentations
   get 'welcome/index'
   get 'presentations/html/example', to: "presentations#example"
