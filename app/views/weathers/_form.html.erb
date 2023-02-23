@@ -1,32 +1,42 @@
 <%= form_with(model: weather) do |form| %>
-  <% if weather.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(weather.errors.count, "error") %> prohibited this weather from being saved:</h2>
+  <div class="form-group">
+    <% if weather.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(weather.errors.count, "error") %> prohibited this weather from being saved:</h2>
 
-      <ul>
-        <% weather.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+        <ul>
+          <% weather.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
 
-  <div>
-    <%= form.label :city, style: "display: block" %>
-    <%= form.text_field :city %>
-  </div>
-
-  <div>
-    <%= form.label :weather, style: "display: block" %>
-    <%= form.text_field :weather %>
-  </div>
-
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+    <% else %>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" style="display: block" id="wthrcity">City</span>
+        </div>
+        <%= form.text_field :city, class: "form-control", placeholder: "Enter City", aria: {label:"weathercity", describedby:"wthrcity"} %>
+      </div>
+      <br>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" style="display: block" id="wthrdegrees">Weather degrees</span>
+        </div>
+        <%= form.text_field :weather, class: "form-control", placeholder: "Enter Weather degrees", aria: {label:"weatherdegrees", describedby:"wthrdegrees"} %>
+      </div>
+      <br>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" style="display: block" id="wthrdescription">Description</span>
+        </div>
+        <%= form.text_field :description, class: "form-control", placeholder: "Enter Description", aria: {label:"weatherdescription", describedby:"wthrdescription"} %>
+      </div>
+      <br>
+      <br>
+      <div>
+        <%= form.submit class: "btn btn-outline-dark my-2 my-sm-0" %>
+      </div>
+    <% end %>
   </div>
 <% end %>
