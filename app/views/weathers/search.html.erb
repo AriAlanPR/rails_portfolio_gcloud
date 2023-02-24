@@ -1,20 +1,46 @@
 <div class="container container-fluid">
   <div class="row">
     <div class="col">
-      <%= form_with(model: nil) do |form| %>
-        <div class="form-group">
-          <br>
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <span class="input-group-text" style="display: block" id="wthrcity">City</span>
-            </div>
-            <%= form.text_field :city, class: "form-control", placeholder: "Enter City", aria: {label:"weathercity", describedby:"wthrcity"} %>
-          </div>
-          <br>
-          <div>
-            <%= form.submit "Search", class: "btn btn-success my-2 my-sm-0" %>
-          </div>
+      <% if Weather.validate_search_results(params) %>
+        <p style="color: green"><%= notice %></p>
+        <form action="/weathers" method="post">
+          <p>
+            <strong>City:</strong> <%= params["city"] %>
+            <input type="hidden" id="weather_city" name="weather[city]" value="<%= params["city"] %>" />
+          </p>
+
+          <p>
+            <strong>Weather:</strong> <%= params["weather"] %>
+            <input type="hidden" id="weather_weather" name="weather[weather]" value="<%= params["weather"] %>" />
+          </p>
+
+          <p>
+            <strong>Description:</strong> <%= params["description"] %>
+            <input type="hidden" id="weather_description" name="weather[description]" value="<%= params["description"] %>" />
+          </p>
+          <button type="submit" class="btn btn-success">Save results</button>
+        </form>
+      <% elsif params["error"]%>
+        <p style="color: red"><%= notice %></p>
+        <div>
+          <%= link_to "Try again", search_weather_path, class: "btn btn-outline-dark" %>
         </div>
+      <% else %>
+        <%= form_with(model: nil) do |form| %>
+          <div class="form-group">
+            <br>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" style="display: block" id="wthrcity">City</span>
+              </div>
+              <%= form.text_field :city, class: "form-control", placeholder: "Enter City name", aria: {label:"weathercity", describedby:"wthrcity"} %>
+            </div>
+            <br>
+            <div>
+              <%= form.submit "Search", class: "btn btn-success my-2 my-sm-0" %>
+            </div>
+          </div>
+        <% end %>
       <% end %>
     </div>
   </div>
