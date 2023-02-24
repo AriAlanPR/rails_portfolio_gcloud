@@ -15,6 +15,19 @@ class WeathersController < ApplicationController
     @weather = Weather.new
   end
 
+  def fromApi 
+    
+    respond_to do |format|
+      format.html { render :search, status: :ok }
+    end
+  end
+  
+  def searchApi
+    respond_to do |format|
+      format.json { render json: weather_api_params, status: :ok }
+    end
+  end
+
   # GET /weathers/1/edit
   def edit
   end
@@ -66,5 +79,9 @@ class WeathersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def weather_params
       params.require(:weather).permit(:city, :weather, :description)
+    end
+    
+    def weather_api_params
+      params.permit(:city)
     end
 end

@@ -1,0 +1,21 @@
+<div class="container container-fluid">
+  <div class="row">
+    <div class="col">
+      <%= form_with(model: nil) do |form| %>
+        <div class="form-group">
+          <br>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text" style="display: block" id="wthrcity">City</span>
+            </div>
+            <%= form.text_field :city, class: "form-control", placeholder: "Enter City", aria: {label:"weathercity", describedby:"wthrcity"} %>
+          </div>
+          <br>
+          <div>
+            <%= form.submit "Search", class: "btn btn-success my-2 my-sm-0" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
