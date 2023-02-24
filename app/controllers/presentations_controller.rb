@@ -1,6 +1,5 @@
 class PresentationsController < ApplicationController
   before_action :set_presentation, only: %i[ show edit update destroy ]
-  include OauthHelper
 
   # GET /presentations or /presentations.json
   def index
