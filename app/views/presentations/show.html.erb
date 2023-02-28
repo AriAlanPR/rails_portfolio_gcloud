@@ -3,6 +3,8 @@
 <%= render @presentation %>
 
 <div>
-  <%= link_to "Edit", edit_presentation_path(@presentation) %> |
+  <% if params['trickdev'] %>
+    <%= link_to "Edit", edit_presentation_path(@presentation), "btn btn-outline-dark" %> |
+  <% end %>
   <%= link_to "Back", presentations_path %>
 </div>
