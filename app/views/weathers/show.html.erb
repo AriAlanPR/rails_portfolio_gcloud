@@ -5,11 +5,14 @@
     <div class="col">
       <%= render @weather %>
 
-      <div>
-        <%= link_to "Edit this weather", edit_weather_path(@weather), class: "btn btn-outline-dark" %> |
-        <%= link_to "Back to weather records", weathers_path, class: "btn btn-outline-dark" %>
-
-        <%= button_to "Delete this weather record", @weather, class:"btn btn-outline-dark", method: :delete %>
+      <div class="row">
+        <div class="col col-sm-4">
+          <%= link_to "Edit this weather", edit_weather_path(@weather), class: "btn btn-outline-dark" %> 
+          <%= link_to "Back to weather records", weathers_path, class: "btn btn-outline-dark" %>
+        </div>
+        <div class="col">
+          <%= button_to "Delete this weather record", @weather, class:"btn btn-outline-danger", method: :delete %>
+        </div>
       </div>
     </div>
   </div>

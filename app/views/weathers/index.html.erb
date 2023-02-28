@@ -25,14 +25,15 @@
               <td><%= weather.description %></td>
               <td><%= link_to 'Details', weather, class: "btn btn-light" %></td>
               <td><%= link_to 'Edit', edit_weather_path(weather), class: "btn btn-light" %></td>
-              <td><%= link_to 'Delete', weather, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-light" %></td>
+              <td><%= link_to 'Delete', weather, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
 
       <br>
-      <%= link_to 'New weather', new_weather_path, class: "btn btn-outline-dark my-2 my-sm-0" %>
+      <%= link_to 'New weather', new_weather_path, class: "btn btn-success my-2 my-sm-0" %>
+      <%= link_to 'Search weather from API', search_weather_path, class: "btn btn-dark my-2 my-sm-0" %>
       <br>
       <br>
       <!-- end base template-->

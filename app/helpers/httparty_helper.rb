@@ -4,12 +4,13 @@ module HttpartyHelper
         p body
         return HTTParty.post(url, :format => :json, :body => body.to_json, :headers => catch_headers(headers))
     end
-
+    
     def put(url, body, headers = nil)
         return HTTParty.put(url, :format => :json, :body => body.to_json, :headers => catch_headers(headers))
     end
-
+    
     def get(url, headers = nil)
+        p url
         return HTTParty.get(url, headers: catch_headers(headers))
     end
     def delete(url,headers = nil)
