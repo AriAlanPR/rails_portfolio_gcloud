@@ -4,7 +4,7 @@
 
 <div>
   <% if params['trickdev'] %>
-    <%= link_to "Edit", edit_presentation_path(@presentation), "btn btn-outline-dark" %> |
+    <%= link_to "Edit", edit_presentation_path(@presentation), class:"btn btn-outline-dark" %> |
   <% end %>
-  <%= link_to "Back", presentations_path %>
+  <%= link_to "Back", presentations_path, class:"btn btn-outline-dark" %>
 </div>
