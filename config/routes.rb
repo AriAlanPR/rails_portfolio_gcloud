@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'presentations/html/example', to: "presentations#example"
   get 'search_weather', to: "weathers#fromApi"
   post 'search_weather', to: "weathers#searchApi"
+  post 'send_email', to: "welcome#send_email"
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'welcome#index'
